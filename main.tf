@@ -17,3 +17,5 @@ resource "aws_instance" "my_vm" {
     Name = "student.2-vm1"
   }
 }
+
+
