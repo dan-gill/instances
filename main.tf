@@ -16,7 +16,7 @@ module "webserver" {
   subnet_id = data.terraform_remote_state.network_details.outputs.my_subnet
   vpc_security_group_ids = data.terraform_remote_state.network_details.outputs.security_group_id_array
   tags = {
-    Name = "student.2-webserver-vm"
+    Name = var.webserver_prefix
   }
 }
 
@@ -29,6 +29,6 @@ module "loadbalancer" {
   subnet_id = data.terraform_remote_state.network_details.outputs.my_subnet
   vpc_security_group_ids = data.terraform_remote_state.network_details.outputs.security_group_id_array
   tags = {
-    Name = "student.2-loadbalancer-vm"
+    Name = var.loadbalancer_prefix
   }
 }
