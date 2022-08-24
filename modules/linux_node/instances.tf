@@ -9,4 +9,16 @@ resource "aws_instance" "my_vm" {
   provisioner "local-exec" {
     command = "sleep 30; knife bootstrap ${self.public_ip} -U ubuntu -i /home/ubuntu/terraform_base/keys/student.2-vm-key --sudo -N ${self.public_ip} --policy-name webserver --policy-group staging -c /home/ubuntu/chef-repo/.chef/config.rb --ssh-verify-host-key=never"
   }
+  provisioner "remote-exec" {
+    connection {
+      host = self.public_ip
+      type = "ssh"
+      user = "ubuntu"
+      agent = false
+      private_key = file("../keys/student.2-vm-key")
+    }
+    inline = [
+      "sudo chef-client -l info"
+    ]
+  }
 }
