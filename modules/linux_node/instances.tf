@@ -21,4 +21,14 @@ resource "aws_instance" "my_vm" {
       "sudo chef-client -l info"
     ]
   }
+  provisioner "local-exec" {
+    when = destroy
+    command = "knife node delete -y ${self.public_ip} -c /home/ubuntu/chef-repo/.chef/config.rb"
+    on_failure = continue
+  }
+  provisioner "local-exec" {
+    when = destroy
+    command = "knife client delete -y ${self.public_ip} -c /home/ubuntu/chef-repo/.chef/config.rb"
+    on_failure = continue
+  }
 }
