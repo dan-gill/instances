@@ -11,3 +11,5 @@ variable "ami" {}
 variable "tags" {}
 
 variable "instance_count" {}
+
+variable "chef_policy_name" {}

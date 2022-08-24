@@ -9,7 +9,7 @@ data "terraform_remote_state" "network_details" {
 
 module "webserver" {
   source = "./modules/linux_node"
-  instance_count = "1"
+  instance_count = "2"
   ami = "ami-08d4ac5b634553e16"
   instance_type = "t3.micro"
   key_name = data.terraform_remote_state.network_details.outputs.key_name
@@ -18,11 +18,12 @@ module "webserver" {
   tags = {
     Name = var.webserver_prefix
   }
+  chef_policy_name = "webserver"
 }
 
 module "loadbalancer" {
   source = "./modules/linux_node"
-  instance_count = "0"
+  instance_count = "1"
   ami = "ami-08d4ac5b634553e16"
   instance_type = "t3.micro"
   key_name = data.terraform_remote_state.network_details.outputs.key_name
@@ -31,4 +32,6 @@ module "loadbalancer" {
   tags = {
     Name = var.loadbalancer_prefix
   }
+  chef_policy_name = "haproxy_loadbalancer"
+  depends_on = [module.webserver]
 }

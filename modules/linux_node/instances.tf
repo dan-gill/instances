@@ -7,7 +7,7 @@ resource "aws_instance" "my_vm" {
   vpc_security_group_ids = var.vpc_security_group_ids
   tags = var.tags
   provisioner "local-exec" {
-    command = "sleep 30; knife bootstrap ${self.public_ip} -U ubuntu -i /home/ubuntu/terraform_base/keys/student.2-vm-key --sudo -N ${self.public_ip} --policy-name webserver --policy-group staging -c /home/ubuntu/chef-repo/.chef/config.rb --ssh-verify-host-key=never"
+    command = "sleep 30; knife bootstrap ${self.public_ip} -U ubuntu -i /home/ubuntu/terraform_base/keys/student.2-vm-key --sudo -N ${self.public_ip} --policy-name ${var.chef_policy_name} --policy-group staging -c /home/ubuntu/chef-repo/.chef/config.rb --ssh-verify-host-key=never"
   }
   provisioner "remote-exec" {
     connection {
