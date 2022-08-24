@@ -8,6 +8,7 @@ data "terraform_remote_state" "network_details" {
 }
 
 module "webserver" {
+  instance_count = "1"
   source = "./modules/linux_node"
   ami = "ami-08d4ac5b634553e16"
   instance_type = "t3.micro"

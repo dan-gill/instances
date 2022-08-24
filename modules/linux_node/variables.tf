@@ -9,3 +9,5 @@ variable "instance_type" {}
 variable "ami" {}
 
 variable "tags" {}
+
+variable "instance_count" {}
