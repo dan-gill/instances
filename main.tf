@@ -9,7 +9,7 @@ data "terraform_remote_state" "network_details" {
 
 module "webserver" {
   source = "./modules/linux_node"
-  instance_count = "2"
+  instance_count = "0"
   ami = "ami-08d4ac5b634553e16"
   instance_type = "t3.micro"
   key_name = data.terraform_remote_state.network_details.outputs.key_name
@@ -23,7 +23,7 @@ module "webserver" {
 
 module "loadbalancer" {
   source = "./modules/linux_node"
-  instance_count = "1"
+  instance_count = "0"
   ami = "ami-08d4ac5b634553e16"
   instance_type = "t3.micro"
   key_name = data.terraform_remote_state.network_details.outputs.key_name
