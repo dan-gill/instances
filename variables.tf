@@ -21,3 +21,11 @@ variable "web_docker_host_prefix" {
 variable "lb_docker_host_prefix" {
   default = "student.2-lb_docker_host-vm"
 }
+
+variable "k8s_control_plane_host_prefix" {
+  default = "student.2-k8s_control_plane"
+}
+
+variable "k8s_worker_node_host_prefix" {
+  default = "student.2-k8s_worker_node"
+}

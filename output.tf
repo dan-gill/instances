@@ -13,3 +13,11 @@ output "web_docker_host_public_ip" {
 output "lb_docker_host_public_ip" {
   value = module.lb_docker_host.*.public_ip
 }
+
+output "k8s_control_plane_public_ip" {
+  value = "${module.k8s_control_plane.*.public_ip}"
+}
+
+output "k8s_worker_node_public_ip" {
+  value = "${module.k8s_worker_node.*.public_ip}"
+}
